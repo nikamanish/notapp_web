@@ -1,0 +1,120 @@
+nav
+{
+    height: 120px;
+}
+
+body
+{
+    background-color: #cccccc;
+    
+}
+
+img
+{
+    
+    vertical-align: middle;
+    padding-bottom: 12px;
+    padding-right: 10px;
+}
+
+.card-title
+{
+    font-size: 50px !important;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    padding-top: 10px;
+}
+
+.card
+{
+    margin-top: -60px;
+}
+
+
+h2
+{
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-size: 30px;
+}
+
+i
+{
+    color: grey;
+}
+
+input['submit']
+{
+    color: white;
+}
+
+.sel-input
+{
+    margin-top: 30px;
+}
+
+/* label color */
+
+
+/***************
+     Switch
+***************/
+
+
+.switch label input[type=checkbox]:checked + .lever {
+  background-color: #84c7c1;
+}
+
+.switch label input[type=checkbox]:checked + .lever:after {
+  background-color: #26a69a;
+}
+
+.switch label .lever {
+  content: "";
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 15px;
+  background-color: #84c7c1;
+  border-radius: 15px;
+  margin-right: 10px;
+  transition: background 0.3s ease;
+  vertical-align: middle;
+  margin: 0 16px;
+}
+
+.switch label .lever:after {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  width: 21px;
+  height: 21px;
+  background-color: #26a69a;
+  border-radius: 21px;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+  left: -5px;
+  top: -3px;
+  transition: left 0.3s ease, background .3s ease, box-shadow 0.1s ease;
+}
+
+
+.input-field div.error
+{
+position: relative;
+top: -1rem;
+left: 0rem;
+font-size: 0.8rem;
+color:#FF4081;
+-webkit-transform: translateY(0%);
+-ms-transform: translateY(0%);
+-o-transform: translateY(0%);
+transform: translateY(0%);
+}
+
+.error
+{
+    float: right;
+    margin-right: 20px;
+}
+
+

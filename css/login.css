@@ -1,0 +1,82 @@
+nav
+{
+    height: 120px;
+}
+
+body
+{
+    background-color: #cccccc;
+    
+}
+
+img
+{
+    
+    vertical-align: middle;
+    padding-bottom: 12px;
+    padding-right: 10px;
+}
+
+.card-title
+{
+    font-size: 50px !important;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    padding-top: 10px;
+}
+
+.card
+{
+    margin-top: -60px;
+}
+
+
+h2
+{
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-size: 30px;
+}
+
+i
+{
+    color: gray;
+}
+
+.input-field div.error
+{
+position: relative;
+top: -1rem;
+left: 0rem;
+font-size: 0.8rem;
+color:#FF4081;
+-webkit-transform: translateY(0%);
+-ms-transform: translateY(0%);
+-o-transform: translateY(0%);
+transform: translateY(0%);
+}
+
+.error
+{
+    float: right;
+    margin-right: 10px;
+}
+
+.error-msg
+{
+    color: #FF4081;
+    text-align: center;
+}
+
+.remember
+{
+    margin-top: 15px;
+}
+
+.about
+{
+    text-align: center;
+    margin-bottom: -25px;
+    margin-top: -10px;
+}
+

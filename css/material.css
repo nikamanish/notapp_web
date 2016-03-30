@@ -1,0 +1,156 @@
+body 
+{
+    background-color: #cccccc;
+}
+
+.go a:before,
+.go a:after 
+{
+    display: inline-block;
+    opacity: 0;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.2s;
+    -moz-transition: -moz-transform 0.3s, opacity 0.2s;
+    transition: transform 0.3s, opacity 0.2s;
+}
+
+.go a:before 
+{
+    margin-right: 10px;
+    content: '[';
+    -webkit-transform: translate(20px);
+    -moz-transform: translate(20px);
+    transform: translate(20px);
+}
+
+.go a:after 
+{
+    margin-left: 10px;
+    content: ']';
+    -webkit-transform: translate(-20px);
+    -moz-transform: translate(-20px);
+    transform: translate(-20px);
+}
+
+.go a:hover:before,
+.go a:hover:after,
+.go a:focus:before,
+.go a:focus:after {
+    opacity: 1;
+    -webkit-transform: translate(0px);
+    -moz-transform: translate(0px);
+    transform: translate(0px);
+}
+
+@media (min-width: 991px) 
+{
+    main 
+    {
+        padding-left: 240px;
+    }
+}
+
+/* Nav Drawer */
+
+.nav-head
+{
+    height: 150px;
+    background-image: url(../graphics/head_bg.jpg);
+    margin-top: -23px;
+}
+
+.dp
+{
+    margin-top: 15px;
+}
+
+.user_name
+{
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+}
+
+li a i
+{
+    background-color: transparent;
+    padding-right: 15px;
+    font-size: 15px !important;
+}
+
+li a label
+{
+    background-color: yellow;
+    padding-top: -15px;
+}
+
+li a 
+{
+    
+}
+
+
+.divider
+{
+    height: 1px;
+    width: 85%;
+    
+    background-color: #424242;
+    margin: 0px auto 0px auto;
+}
+
+/* Nav Drawer */
+
+/* Nav Bar */
+
+.page-title
+{
+    padding-left: 50px;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+
+.navbar-fixed
+{
+    margin-bottom: 25px;
+}
+
+.button-collapse .material-icons
+{
+    font-size: 20px;
+    margin-top: -2px;
+    margin-left: 10px;
+}
+
+/* Nav Bar */
+
+.card-title
+{
+    font-size: 20px !important;
+}
+
+.btn span
+{
+    font-size: 13px !important;
+}
+
+.sel-input
+{
+    margin-top: 50px !important;
+}
+
+/*
+  temp
+*/
+
+@media (min-width:992px) {
+    #aside {
+        width:250px;
+    }
+}
+
+@media (max-width:992px) {
+    #aside.pinned, #aside.pin-bottom {
+        position:static !important;
+        top: auto !important;
+    }
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>        
+        <link href='https://fonts.googleapis.com/css?family=Roboto:100,200' rel='stylesheet' type='text/css'>
+        <link type="text/css" rel="stylesheet" href=" /css/materialize.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href=" /css/404.css" />
+        <link rel="icon" type="image/png" href="/myIcon.png">        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>        
+        <title>Page Not Found</title>        
+    </head>
+    
+    <body>                
+        <main>            
+            <div class="row container">
+                <div class="card white ">
+                    <div class="card-content grey-text text-darken-1">
+                        <span class="card-title" >404: Not Found</span>
+                    </div>
+                </div>
+            </div>
+        </main>        
+    </body>
+</html>

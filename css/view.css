@@ -1,0 +1,169 @@
+body 
+{
+    background-color: #cccccc;
+}
+
+
+@media (min-width: 991px) 
+{
+    main 
+    {
+        padding-left: 240px;
+    }
+}
+
+/* Nav Drawer */
+
+.nav-head
+{
+    height: 150px;
+    background-color: dodgerblue;
+    margin-top: -23px;
+}
+
+.dp
+{
+    
+    background-color: transparent!important;
+    
+    object-fit: cover; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+    
+}
+
+
+
+.user_name
+{
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    
+}
+
+.dp-a
+{
+    background-color: transparent;
+    padding: 0 !important;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    height: 100%;
+}
+
+li a i
+{
+    background-color: transparent;
+    margin-top: 5px;
+    margin-right: 15px;
+    font-size: 20px !important;
+    display:inline-block;
+    
+}
+
+li a label
+{
+    background-color: transparent;
+    margin-top: -10px !important;
+    font-size: 15px;
+    display:inline-block;
+}
+
+li 
+{
+    background-color: white;
+    width: 100% !important;
+}
+
+
+.divider
+{
+    height: 1px;
+    width: 85%;
+    
+    background-color: lightgray;
+    margin: 5px auto 5px auto;
+}
+
+.selected
+{
+    background-color: lightgray ;
+}
+
+/* Nav Drawer */
+
+/* Nav Bar */
+
+.page-title
+{
+    padding-left: 50px;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+
+.navbar-fixed
+{
+    margin-bottom: 25px;
+}
+
+.button-collapse .material-icons
+{
+    font-size: 20px;
+    margin-top: -2px;
+    margin-left: 10px;
+}
+
+/* Nav Bar */
+
+.card
+{
+    font-family: "Roboto", sans-serif !important;
+    font-weight: 100 !important;
+}
+
+.btn span
+{
+    font-size: 13px !important;
+}
+
+
+.view-notice
+{
+   margin-top: 15px;
+}
+
+.class-list
+{
+    margin-top: 10px;
+    
+}
+
+.class-list ul li
+{
+    font-size: 15px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+}
+
+.view-dept
+{
+    margin-top: 25px;
+}
+
+.card-image img
+{
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+}
+
+.card-title
+{
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-size: 15px !important;
+}
+
+.card ul
+{
+    margin-left: 20px !important;
+}

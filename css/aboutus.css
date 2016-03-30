@@ -1,0 +1,105 @@
+body 
+{
+    background-color: #cccccc;
+}
+
+
+@media (min-width: 991px) 
+{
+    
+}
+
+/* Nav Drawer */
+
+
+/* Nav Bar */
+
+.page-title
+{
+    padding-left: 20px;
+    padding-top: -10px;
+    display: inline-block !important;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+
+.navbar-fixed
+{
+    margin-bottom: 25px;
+}
+
+.button-collapse .material-icons
+{
+    font-size: 20px;
+    margin-left: 10px;
+    vertical-align: middle !important;
+}
+
+/* Nav Bar */
+
+.devs
+{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.devs img
+{
+    border-radius: 15%;
+}
+
+i
+{
+    margin-left: 6px;
+    margin-top: -12px !important;
+    display: inline-block!important;
+    border-radius: 50%;
+}
+
+.back
+{
+    height: 45px;
+    width: 45px;
+    display: inline-block;
+    margin-left: 20px;
+    border-radius: 50%;
+}
+
+.fb, .linkedin, .twitter
+{
+    margin-right: 0px !important;
+}
+
+.fb i
+{
+    color: #3b5998;
+    margin-left: 0px;
+    margin-top: 0px !important;
+}
+
+.linkedin i
+{
+    color: #0077b5;
+    margin-left: 0px;
+    margin-top: 0px !important;
+}
+
+.twitter i
+{
+    color: #55acee;
+    margin-left: 0px;
+    margin-top: 0px !important;
+}
+
+.card-action
+{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.social
+{
+    text-align: center;
+    margin-bottom: 5px !important;
+}
