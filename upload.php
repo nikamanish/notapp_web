@@ -92,7 +92,7 @@
                             $mssg = str_replace('"','',$mssg);
                             $mssg = str_replace("'",'',$mssg);
                             
-                            echo "<br>$mssg<br>";
+                            //echo "<br>$mssg<br>";
                             
                             return $mssg;
                         }
@@ -150,7 +150,7 @@
                         $sql = "insert into notice(title, n_type, uploadDate, exp, name, u_id, d_id) values ('$title' , '$type', '$upDate' , '$exp' , '$name' , '$u_id', '$d_id')";
                         
                         
-                        echo "<br>$sql<br>";
+                        //echo "<br>$sql<br>";
                         
                         $result = mysqli_query($conn,$sql) or die("<p>notice insert error</p>");
                         
@@ -189,7 +189,7 @@
                         );
 
 
-                        echo json_encode($msg);
+                        //echo json_encode($msg);
 
                         ///later...database flaw
 
@@ -201,7 +201,7 @@
 
                             $d_id = $dept_details['d_id'];
                             
-                            echo "<br> $d_id  $n_id <br>";
+                            //echo "<br> $d_id  $n_id <br>";
 
                             $sql = "insert into n_for_d(n_id, d_id) values ('$n_id' , '$d_id')";
                             $result = mysqli_query($conn,$sql) or die("<p>n_for_d insert error</p>"); 
@@ -215,7 +215,7 @@
                             while($stud_details = mysqli_fetch_assoc($result))
                             {
                                 $temp_id = $stud_details['u_id'];
-                                echo "<br>u_id   $temp_id<br>";
+                                //echo "<br>u_id   $temp_id<br>";
                                 $flag = 0;
                                 $sql = "select prefs from preferences where u_id=$temp_id";
                                 $res=mysqli_query($conn,$sql) or die(mysqli_error($conn));
@@ -225,7 +225,7 @@
                                 
                                 foreach($prefs_arr as $pref)
                                 {
-                                    echo $pref." $nb_id $dept<br><br>";
+                                    //echo $pref." $nb_id $dept<br><br>";
                                     if($pref == $nb_id)
                                     {
                                         $flag = 1;
@@ -236,8 +236,7 @@
                                 if($flag == 1)
                                 {
                                     $regId[] = $stud_details['gcmRegId'];
-                                }
-                                
+                                }                                
                             }
                             
                             /*
@@ -342,6 +341,7 @@
 
                         //d_id
                         $d_id = $dept_details['d_id'];
+                        $nb_id = $d_id;
 
                         //to create random string
 
@@ -413,7 +413,7 @@
                         $result = mysqli_query($conn,$sql) or die("<p>insert error</p>");
                         $md5 = md5_file($path);
 
-                        echo "notices/$dept/$name.pdf". "<br>" . "$md5"; 
+                        //echo "notices/$dept/$name.pdf". "<br>" . "$md5"; 
 
 
                         $temp_id = ''.$n_id;
@@ -433,7 +433,7 @@
                         );
 
 
-                        echo json_encode($msg);
+                        //echo json_encode($msg);
 
                         ///later...database flaw
 
@@ -444,10 +444,12 @@
                             $dept_details = mysqli_fetch_assoc($result);
 
                             $d_id = $dept_details['d_id'];
+                            
+                            //echo "<br> $d_id  $n_id <br>";
 
                             $sql = "insert into n_for_d(n_id, d_id) values ('$n_id' , '$d_id')";
                             $result = mysqli_query($conn,$sql) or die("<p>insert error</p>"); 
-
+                            
                             /**/
                             
                             $sql = "select u_id,gcmRegId from student where d_id='$d_id' and c_id='$c_id'";
@@ -458,25 +460,30 @@
                             while($stud_details = mysqli_fetch_assoc($result))
                             {
                                 $temp_id = $stud_details['u_id'];
+                                //echo "<br>u_id   $temp_id<br>";
                                 $flag=0;
-                                $sql = "select prefs from preferences where u_id=$u_id";
+                                $sql = "select prefs from preferences where u_id=$temp_id";
                                 $res=mysqli_query($conn,$sql) or die(mysqli_error($conn));
                                 $pref_details = mysqli_fetch_assoc($res);
                                 $temp_prefs = $pref_details['prefs'];
+                                
+                                //echo "<br><br> $temp_prefs <br><br>";
+                                
                                 $prefs_arr = explode(",", $temp_prefs);
                                 
                                 foreach($prefs_arr as $pref)
                                 {
-                                    if($pref == $dept)
+                                    //echo $pref."** $nb_id $dept<br><br>";
+                                    if($pref == $nb_id)
                                     {
                                         $flag = 1;
                                         break;
                                     }
                                 }
                                 
-                                if(flag == 1)
+                                if($flag == 1)
                                 {
-                                    $regId[] = $r['gcmRegId'];
+                                    $regId[] = $stud_details['gcmRegId'];
                                 }
                                 
                             }
@@ -494,9 +501,9 @@
                             {
                                 $regId[] = $r['gcmRegId'];
                             }
-
-                            //echo json_encode($regId);
                             */
+                            //echo json_encode($regId);
+                            
                             include_once 'push/gcm.php';
 
                             $gcm = new GCM();
@@ -519,14 +526,14 @@
                         
                         <div class="dp">
                             <?php
-                                if(!$user_details['avatar'])
+                                //if(!$user_details['avatar'])
                                 {
                                     echo "<img src=' graphics/placeholder.png' alt='' height='40px'>";
                                 }
 
-                                else
+                                //else
                                 {
-                                    echo "<img src=' graphics/dp.jpg' alt='' height='40px'>";
+                                    //echo "<img src=' graphics/dp.jpg' alt='' height='40px'>";
                                 }
                             ?>
                         </div>

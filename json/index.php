@@ -31,7 +31,7 @@
 	$sql = "select n_id, name, title, uploadDate, exp,u_id  from notice a where d_id=$d_id and n_id > $max and n_id in (select n_id from n_for_c where c_id = $c_id) and n_id in (select n_id from n_for_d where d_id = $b_id) order by n_id desc";
 
     //echo $sql;
-    
+
     $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
     $length = mysqli_num_rows ( $result );
 
@@ -46,6 +46,17 @@
             $user_details = mysqli_fetch_assoc($res);
             $user_name = $user_details['f_name'] . ' ' . $user_details['l_name'];
             $r['uploadedBy'] = $user_name;
+            $r['noticeBoard'] = ''.$d_id;            
+            $md5 = "";
+            if($r['name'][0]!='#')
+            {
+                $path = "../notices/" . $dept . "/" . $r['name'] . ".pdf";
+                $md5=md5_file($path);
+            }
+            
+            
+            
+            $r['md5'] = $md5;
             $rows['result'][] = $r;
         }
         echo json_encode($rows);
@@ -55,4 +66,4 @@
         echo json_encode (json_decode ("{}"));
     }
 	
-?>a
+?>

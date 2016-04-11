@@ -40,10 +40,10 @@ class GCM {
         curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields) );
         $result = curl_exec($ch);
         
-        echo "<br><br><br>".json_encode( $fields)."<br>";
+        //echo "<br><br><br>".json_encode( $fields)."<br>";
         
         curl_close( $ch );
-        echo "<br><br><br>".$result;
+        //echo "<br><br><br>".$result;
     }
  
 }
