@@ -138,7 +138,7 @@
 
                                                     <div class='modal-content'>
                                                     
-                                                        <embed width='100%' height='100%' src='notices/$dept/$name.pdf'>
+                                                        <embed width='100%' height='100%' src='notices/$dept/$name.pdf?#zoom=70&scrollbar=0&toolbar=0&navpanes=0'>
                                                     </div>
 
                                                     <div class='modal-footer'>
