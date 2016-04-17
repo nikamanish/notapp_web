@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         
         <title>
-            Annexion Clan            
+            RubberDuck            
         </title>
         
     </head>
@@ -24,7 +24,6 @@
                 <nav class="teal">
                     <a href="upload.php" class="back waves-light waves-effect"><i class="material-icons prefix">arrow_back</i></a>
                 </nav>
-
             </div>
 
             <div class="container">
@@ -33,11 +32,11 @@
                         <div class="card white">
                             <div class="card-content grey-text text-darken-1">
                                 <div class="row">
-                                    <span class="card-title col offset-m1">Annnexion Clan</span>
-                                    <div class="col m10 s12 offset-m1"><p align="justify">We, Xionites, are a group of developers (B.Tech Students) focussed on creating an impact and providing personalised services to our clients. Currently we specialize in Android Application Development, Web Development, Software Sales, Services and Maintainance.<br> At Annexion, we set high goals and do our best to achieve them. We deliver an experience to our clients that is no short of outstanding and would love to do the same for you too. Contact us at:</p>
-                                        <br>Website : <a href = "http://www.annexion.in" target="_blank">www.annexion.in</a>
+                                    <span class="card-title col offset-m1">RubberDuck</span>
+                                    <div class="col m10 s12 offset-m1"><p align="justify">We are a group of developers (B.Tech Students) focussed on creating an impact and providing personalised services to our clients. Currently we specialize in Android Application Development, Web Development, Software Sales, Services and Maintainance.<br> At Annexion, we set high goals and do our best to achieve them. We deliver an experience to our clients that is no short of outstanding and would love to do the same for you too. Contact us at:</p>
+                                        <br>Website : <a href = "http://www.rubberduck.co.in" target="_blank">www.rubberduck.co.in</a>
                                         <br>Phone   : +919503653859
-                                        <br>Email   : annexion.clan@gmail.com
+                                        <br>Email   : clan.rubberduck@gmail.com
                                         <br>Address : Flat 1, Vishwalila Apartment, Vishrambagh, Sangli 416416.
                                     </div>                                
                                 </div>
