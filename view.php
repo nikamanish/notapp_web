@@ -46,8 +46,7 @@
                     <div class="info">
                         <div class="title">
                             <label class="nav-title">Notapp - Upload</label>
-                        </div>        
-                        
+                        </div> 
                         <div class="dp">
                             <img height="40px" class="" src="graphics/dp.jpg">
                         </div>
@@ -62,13 +61,10 @@
                                 <a class="signout" href="logout.php">Sign out</a>
                             </div>
                         </div>
-                    </div>
-                    
+                    </div>                    
                 </nav>
                 
                 <nav class="nav-bar-tabs z-depth-1 teal darken-1">
-                    
-                    
                     <div class="row">
                         <div class="col s12 l6">
                             <ul class="tab-bar">
@@ -79,140 +75,196 @@
                                 <li class="tab-new invisible col s3 tooltipped" data-position="bottom" data-delay="5" data-tooltip="Sign out"><a href="">Exit</a></li>
                             </ul>
                         </div>
-                    </div>                   
-                    
+                    </div>
                 </nav>
             </div>
             
             <div class="content">                
                 <div class="row">
-                    <div class="col s12 row">
-                        <?php
+                    <div class="col m8 s12 offset-m2">                       
+                        <ul class="collapsible" data-collapsible="accordion">
+                            
+                            <?php
+                                $u_id = $user_details['u_id'];
 
-                            $u_id = $user_details['u_id'];
-
-                            $sql = "select * from notice where u_id='$u_id' order by n_id desc";
-                            $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
-
-                            $ctr = 0;
-                            while($row = mysqli_fetch_assoc($result))
-                            {
-                                $d_id = $row['d_id'];
-                                $n_id = $row['n_id'];
-
-                                $sql = "select d_name from department where d_id='$d_id'";
-                                $dept_res=mysqli_query($conn,$sql) or die(mysqli_error($conn));
-                                $dept_details = mysqli_fetch_assoc($dept_res);
-                                $dept = $dept_details['d_name'];
-                                $dept = strtolower($dept);
-                                $exp = $row['exp'];
-                                $upDate = $row['uploadDate'];
-                                $title = $row['title'];
-                                $name = $row['name'];
-                                $classes = " ";
-                                $classes = printDepts($n_id);
-
-                                $upDate = alphaDate($upDate);
-                                $exp = alphaDate($exp);
-
-                                echo "<div class='col s12 m4 l3'>
-                                        <div class='card'>
-                                            <div class='card-image waves-effect waves-block waves-light'>
-                                                <img class='activator' src=' graphics/icons/$dept.png'>
-                                            </div>
-                                            <div class='card-content'>
-                                                <span class='card-title activator grey-text text-darken-4'>$title<i class='material-icons right'>more_vert</i></span>
-                                                <a href='notices/$dept/$name.pdf' target='_blank' class='right'><i class='material-icons right'>description</i></a>
-
-                                            </div>
-                                            <div class='card-reveal'>
-                                                <span class='card-title grey-text text-darken-4'>$title<i class='material-icons right'>close</i></span>
-                                                <p>Uploaded on $upDate</p>
-                                                <ul>
-                                                    $classes                                                
-                                                </ul>
-                                                <p>Expires on $exp</p>
-                                            </div>
-                                        </div>
-                                    </div>";
-                                    $ctr++;
-                            }
-
-                            if($ctr == 0)
-                            {
-                               echo "<div class='col s12 m12'>
-                                        <div class='card'>
-                                            <div class='card-image waves-effect waves-block waves-light'>
-                                                <img class='activator' src=' graphics/mat1.jpg'>
-                                            </div>
-                                            <div class='card-content'>
-                                                <span class='card-title activator grey-text text-darken-4'>No notices uploaded by you yet<i class='material-icons right'>more_vert</i></span>
-                                                <a href='upload.php'  class='right'><i class='material-icons right'>file_upload</i></a>
-
-                                            </div>
-                                            <div class='card-reveal'>
-                                                <span class='card-title grey-text text-darken-4'>Nothing Yet<i class='material-icons right'>close</i></span>
-                                                <p>Upload the notices you want to be delivered to your students</p>
-
-                                            </div>
-                                        </div>
-                                    </div>";
-                            }
-
-                            function printDepts($n_id)
-                            {
-                                include("connect.php");
-
-                                $sql = "select c_id from n_for_c where n_id='$n_id'";
-                                $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
-                                $row = mysqli_fetch_assoc($result);
-
-                                $c_id = $row['c_id'];
-
-                                $sql = "select full_name from class where c_id='$c_id'";
-                                $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
-                                $row = mysqli_fetch_assoc($result);
-
-                                $c_name = $row['full_name'];
-
-                                $sql = "select * from n_for_d where n_id='$n_id'";
+                                $sql = "select * from notice where u_id='$u_id' order by n_id desc";
                                 $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
 
-                                $classes = '';
-
+                                $ctr = 0;
                                 while($row = mysqli_fetch_assoc($result))
                                 {
                                     $d_id = $row['d_id'];
+                                    $n_id = $row['n_id'];
+                                    $ctr++;
+                                    $sql = "select d_name from department where d_id='$d_id'";
+                                    $dept_res=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+                                    $dept_details = mysqli_fetch_assoc($dept_res);
+                                    $dept = $dept_details['d_name'];
+                                    $dept = strtolower($dept);
+                                    $exp = $row['exp'];
+                                    $upDate = $row['uploadDate'];
+                                    $title = $row['title'];
+                                    $name = $row['name'];
+                                    $classes = " ";
+                                    $classes = printDepts($n_id);
+                                    
+                                    
+                                                                        
+                                    $upDate = alphaDate($upDate);
+                                    $exp = alphaDate($exp);                                    
+                                                                     
+                                    
+                                    if($name[0] != '#')
+                                    {
+                                        echo "<li>
+                                                <div class='collapsible-header'>
+                                                    <div class='row no-margin title-header'>
+                                                        <div class='col s10 m11 no-padding' >
+                                                            <i class='material-icons'>insert_drive_file</i>
+                                                            <p class='notice-title truncate'>
+                                                                $title
+                                                            </p>
+                                                        </div>
+                                                        <div class='col no-padding s2 m1' >
+                                                            <a class='right modal-trigger' href='#message$ctr'>
+                                                                <i class='material-icons no-margin'>description</i>
+                                                            </a>                                                       
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+                                                <div id='message$ctr' class='modal modal-fixed-footer'>
 
-                                    $sql = "select full_name from department where d_id='$d_id'";
-                                    $res=mysqli_query($conn,$sql) or die(mysqli_error($conn));
-                                    $r = mysqli_fetch_array($res);
-                                    $d_name = $r['full_name'];
+                                                    <div class='modal-content'>
+                                                    
+                                                        <embed width='100%' height='100%' src='notices/$dept/$name.pdf'>
+                                                    </div>
 
-                                    $classes.= "<li>$c_name $d_name</li>";
+                                                    <div class='modal-footer'>
+                                                        <a class='modal-action modal-close waves-effect waves-blue btn-flat '>close</a>
+                                                    </div>
+                                                </div>
+                                                
+
+                                                <div class='collapsible-body'>
+                                                    <p class=''>Uploaded on $upDate</p>
+                                                    
+                                                    <ul class='class-list no-padding-top'>
+                                                        $classes                                                
+                                                    </ul>
+                                                    
+                                                    <p class='no-padding-top'>Expires on $exp</p>
+                                                </div>
+                                            </li>";                                        
+                                    }
+                                    
+                                    else
+                                    {
+                                        $name = substr($name, 1);   
+                                        echo "<li>
+                                                <div class='collapsible-header'>
+                                                    <div class='row no-margin title-header'>
+                                                        <div class='col s10 m11 no-padding' >
+                                                            <i class='material-icons'>chat_bubble</i>
+                                                            <p class='notice-title truncate'>
+                                                                $title
+                                                            </p>
+                                                        </div>
+                                                        <div class='col no-padding s2 m1' >
+                                                            <a class='right modal-trigger' href='#message$ctr'>
+                                                                <i class='material-icons no-margin'>chat</i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div id='message$ctr' class='modal modal-fixed-footer'>
+
+                                                    <div class='modal-content'>
+                                                    
+                                                        <h5 class='center-align'>
+                                                            $title
+                                                        </h5> 
+                                                        
+                                                        <div class='container'>
+                                                            <div class='divider'></div>
+                                                            <p class='justify'>
+                                                                $name
+                                                            </p> 
+                                                        </div>
+                                                    </div>
+
+                                                    <div class='modal-footer'>
+                                                        <a class='modal-action modal-close waves-effect waves-blue btn-flat '>close</a>
+                                                    </div>
+                                                </div>                                
+
+                                                <div class='collapsible-body'>
+                                                    <p>Uploaded on $upDate</p>
+                                                    
+                                                    <ul class='class-list no-padding-top'>
+                                                        $classes                                                
+                                                    </ul>
+                                                    
+                                                    <p class='no-padding-top'>Expires on $exp</p>
+                                                </div>
+                                            </li>";                                        
+                                    }
                                 }
 
-                                return $classes;                         
-                            }
+                                function printDepts($n_id)
+                                {
+                                    include("connect.php");
 
-                            function alphaDate($date)
-                            {
-                                $frags = explode("-", $date);
+                                    $sql = "select c_id from n_for_c where n_id='$n_id'";
+                                    $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+                                    $row = mysqli_fetch_assoc($result);
 
-                                $month = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"); 
-                                $index = (int)($frags[1]);
-                                return $frags[2] . ' ' . $month[$index -1] . ' ' . $frags[0];
-                            }
-                        ?>
+                                    $c_id = $row['c_id'];
+
+                                    $sql = "select full_name from class where c_id='$c_id'";
+                                    $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+                                    $row = mysqli_fetch_assoc($result);
+
+                                    $c_name = $row['full_name'];
+
+                                    $sql = "select * from n_for_d where n_id='$n_id'";
+                                    $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+
+                                    $classes = '';
+
+                                    while($row = mysqli_fetch_assoc($result))
+                                    {
+                                        $d_id = $row['d_id'];
+
+                                        $sql = "select full_name from department where d_id='$d_id'";
+                                        $res=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+                                        $r = mysqli_fetch_array($res);
+                                        $d_name = $r['full_name'];
+
+                                        $classes.= "<li>$c_name $d_name</li>";
+                                    }
+
+                                    return $classes;                         
+                                }
+
+                                function alphaDate($date)
+                                {
+                                    $frags = explode("-", $date);
+
+                                    $month = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"); 
+                                    $index = (int)($frags[1]);
+                                    
+                                    return $frags[2] . ' ' . $month[$index -1] . ' ' . $frags[0];
+                                    
+                                }
+                            ?>
+                        </ul>                    
                     </div>
-
                 </div>
-                
             </div>
-            
-           
-        </main>
-        
+        </main>        
         
         <!--Import jQuery before materialize.js-->
         <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -221,6 +273,7 @@
             $(document).ready(function() {
             
             $('.tooltipped').tooltip({delay: 50});
+            $('.modal-trigger').leanModal();
             Materialize.fadeInImage('#profilepic');
             Materialize.showStaggeredList('#staggered-list');
             $('select').material_select();
