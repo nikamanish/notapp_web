@@ -48,7 +48,7 @@
                             <label class="nav-title">Notapp - Upload</label>
                         </div> 
                         <div class="dp">
-                            <img height="40px" class="" src="graphics/dp.jpg">
+                            <img height="40px" class="" src="graphics/placeholder.png">
                         </div>
                         
                         <div class="text-info">
@@ -126,9 +126,12 @@
                                                             </p>
                                                         </div>
                                                         <div class='col no-padding s2 m1' >
+                                                                                                                    
                                                             <a class='right modal-trigger' href='#message$ctr'>
                                                                 <i class='material-icons no-margin'>description</i>
-                                                            </a>                                                       
+                                                            </a>
+                                                            
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -138,7 +141,7 @@
 
                                                     <div class='modal-content'>
                                                     
-                                                        <embed width='100%' height='100%' src='notices/$dept/$name.pdf?#zoom=70&scrollbar=0&toolbar=0&navpanes=0'>
+                                                        <embed width='100%' height='100%' src='notices/$dept/$name.pdf'>
                                                     </div>
 
                                                     <div class='modal-footer'>
