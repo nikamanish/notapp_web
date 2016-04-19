@@ -189,8 +189,14 @@ body
 
 .invisible
 {
-    visibility: hidden;
+    display: none !important;
 }
+
+.visible
+{
+    display: inline-block !important;
+}
+
 
 .content
 {
@@ -232,7 +238,12 @@ body
     
     .invisible
     {
-        visibility: visible;
+        display: inline-block !important;
     }    
+    
+    .visible
+    {
+        display: none !important;
+    }
 }
 
