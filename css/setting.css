@@ -1,0 +1,28 @@
+.container
+{
+    margin-top: 60px;
+}
+
+.card-title
+{
+    font-size: 20px !important;
+}
+
+.input-field div.error
+{
+position: relative;
+top: -1rem;
+left: 0rem;
+font-size: 0.8rem;
+color:#FF4081;
+-webkit-transform: translateY(0%);
+-ms-transform: translateY(0%);
+-o-transform: translateY(0%);
+transform: translateY(0%);
+}
+
+.error
+{
+    float: right;
+    margin-right: 20px;
+}

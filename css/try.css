@@ -203,6 +203,41 @@ body
     margin-top: 60px;
 }
 
+.setting-icon
+{
+   
+    display: inline-block;
+    
+    border-radius: 50%;
+}
+
+.setting-icon i
+{
+    margin-left: 10px;
+    margin-top: -6px !important;
+    display: inline-block!important;
+    border-radius: 50%;
+    font-size: 25px !important;
+}
+
+.setting-div
+{
+    margin-right: 17px;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+}
+
+.setting-div.selected
+{    
+    background-color: rgba(255,255,255,0.5) !important;
+}
+
+.phone-nav i
+{
+    margin-top: -3px;
+}
+
 
 
 /*
@@ -215,9 +250,21 @@ body
 
 @media (max-width: 600px) 
 {
-    .text-info 
+    .text-info
     {
         visibility: hidden;
+    }
+    
+    .pc-nav
+    {
+        visibility: hidden;
+    }
+    
+    
+    
+    .setting-div
+    {
+        visibility: hidden !important;
     }
     
     .dp

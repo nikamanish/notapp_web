@@ -30,6 +30,12 @@
                 //$username = 'nikamanish007@gmail.com';
                 $sql = "select * from user where email='$username'";
                 $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+            
+                //$stmt = mysqli_prepare($conn, "select * from user where email=?");
+                //mysqli_stmt_bind_param($stmt, "s", $username);
+                //mysqli_stmt_execute($stmt); 
+                //$result = $stmt->get_result();
+            
                 $user_details = mysqli_fetch_assoc($result);
 
                 $user_name = $user_details['f_name'] . ' ' . $user_details['l_name'];
@@ -74,10 +80,22 @@
                         $class = $_POST["class"];
                         $branch = $_POST["branch"];
                         $dept = $_POST["dept"];
-                        $expiration = $_POST["expiration"];
                         $type = '2';
                         $name = $_POST["messageText"];
-                        $name = '#'.$name;
+                        $name = '#'.$name;                       
+                       
+                        
+                        
+                        function trimMssg($mssg)
+                        {
+                            $mssg = str_replace('"','',$mssg);
+                            $mssg = str_replace("'",'',$mssg);
+                            
+                            //echo "<br>$mssg<br>";
+                            
+                            return $mssg;
+                        }
+                        $name = trimMssg($name);
                         
                         /* $message = 'This is a message.';   */
 
@@ -86,8 +104,14 @@
                         include("connect.php");
                         $cookie_name = "notapp_username";
                         $username = $_COOKIE[$cookie_name];
+                        
                         $sql = "select u_id from user where email='$username'";
                         $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+                        //$stmt = mysqli_prepare($conn, "select * from user where email=?");
+                        //mysqli_stmt_bind_param($stmt, "s", $username);
+                        //mysqli_stmt_execute($stmt); 
+                        //$result = $stmt->get_result();
+                        
                         $user_details = mysqli_fetch_assoc($result);
 
                         $u_id = $user_details['u_id'];
@@ -99,37 +123,37 @@
 
                         $sql = "select d_id from department where d_name='$dept'";
                         $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+                        
+                        //$stmt = mysqli_prepare($conn, "select d_id from department where d_name=?");
+                        //mysqli_stmt_bind_param($stmt, "s", $dept);
+                        //mysqli_stmt_execute($stmt); 
+                        //$result = $stmt->get_result();
+                        
                         $dept_details = mysqli_fetch_assoc($result);
 
                         //d_id
                         $d_id = $dept_details['d_id'];
+                        $nb_id = $d_id;
                         
                         
-                        $exp =  date('Y-m-d', strtotime($expiration));
-
-                        if($exp == '1970-01-01' || $exp == null)
-                        {
-                            $exp =  date('Y-m-d', strtotime('2016-07-04'));
-                        } 
+                        
                         
                         $upDate = date('Y-m-d');
                         
                         
-                        $sql = "insert into notice(title, n_type, uploadDate, exp, name, u_id, d_id) values ('$title' , '$type', '$upDate' , '$exp' , '$name' , '$u_id', '$d_id')";
-                        $result = mysqli_query($conn,$sql) or die("<p>insert error</p>");
+                        $sql = "insert into notice(title, n_type, uploadDate, name, u_id, d_id) values ('$title' , '$type', '$upDate'  , '$name' , '$u_id', '$d_id')";
+                        
+                        
+                        //echo "<br>$sql<br>";
+                        
+                        $result = mysqli_query($conn,$sql) or die("<p>notice insert error</p>");
+                        
+                        //$stmt = mysqli_prepare($conn, "insert into notice(title, n_type, uploadDate, exp, name, u_id, d_id) values (? , ?, ? , ? , ? , ?, ?)");
+                        //mysqli_stmt_bind_param($stmt, "sssssdd", $title , $type, $upDate , $exp , $name , $u_id, $d_id);
+                        //mysqli_stmt_execute($stmt); 
+                        //$result = $stmt->get_result();
 
                         $n_id = mysqli_insert_id($conn);
-
-                        $sql = "insert into n_for_c(n_id, c_id) values ('$n_id' , '$c_id')";
-                        $result = mysqli_query($conn,$sql) or die("<p>insert error</p>");
-                        
-
-
-                        $temp_id = ''.$n_id;
-                        
-                        $md5="";
-                        
-                        
                         
                         $sql = "select c_id from class where c_name='$class'";
                         $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
@@ -137,6 +161,12 @@
 
                         $c_id = $class_details['c_id'];
 
+                        $sql = "insert into n_for_c(n_id, c_id) values ('$n_id' , '$c_id')";
+                        $result = mysqli_query($conn,$sql) or die("<p>n_for_c insert error</p>");
+                        
+                        $temp_id = ''.$n_id;
+                        
+                        $md5="";
                         
 
                         $msg = array
@@ -145,7 +175,6 @@
                             'uploadDate'=> $upDate,
                             'name'	     => $user_name,
                             'n_id'=> $temp_id,
-                            'exp'	=> $exp,
                             'dept'	=> $d_id,
                             'link' => $name,
                             'md5' => $md5
@@ -165,12 +194,45 @@
 
                             $d_id = $dept_details['d_id'];
                             
-                            echo "$d_id <br>";
+                            echo "<br> $d_id  $n_id <br>";
 
                             $sql = "insert into n_for_d(n_id, d_id) values ('$n_id' , '$d_id')";
-                            $result = mysqli_query($conn,$sql) or die("<p>insert error</p>"); 
-
-
+                            $result = mysqli_query($conn,$sql) or die("<p>n_for_d insert error</p>"); 
+                            
+                            
+                            $sql = "select u_id,gcmRegId from student where d_id='$d_id' and c_id='$c_id'";
+                            $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+                            
+                            $regId = array();
+                                
+                            while($stud_details = mysqli_fetch_assoc($result))
+                            {
+                                $temp_id = $stud_details['u_id'];
+                                echo "<br>u_id   $temp_id<br>";
+                                $flag = 0;
+                                $sql = "select prefs from preferences where u_id=$temp_id";
+                                $res=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+                                $pref_details = mysqli_fetch_assoc($res);
+                                $temp_prefs = $pref_details['prefs'];
+                                $prefs_arr = explode(",", $temp_prefs);
+                                
+                                foreach($prefs_arr as $pref)
+                                {
+                                    echo $pref." $nb_id $dept<br><br>";
+                                    if($pref == $nb_id)
+                                    {
+                                        $flag = 1;
+                                        break;
+                                    }
+                                }
+                                
+                                if($flag == 1)
+                                {
+                                    $regId[] = $stud_details['gcmRegId'];
+                                }                                
+                            }
+                            
+                            /*
                             $sql = "select gcmRegId from student where d_id='$d_id' and c_id='$c_id'";
                             $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
                             //$stud_details = mysqli_fetch_assoc($result);
@@ -181,18 +243,15 @@
                             {
                                 $regId[] = $r['gcmRegId'];
                             }
-
-                            //echo json_encode($regId);
+                            */
+                            echo json_encode($regId);
 
                             include_once 'push/gcm.php';
 
                             $gcm = new GCM();
 
                             $gcm_res = $gcm->send_notification($regId, $msg);
-
-                        }
-
-                                                
+                        }                       
                     }
                 }
                 
@@ -241,7 +300,7 @@
                         $class = $_POST["class"];
                         $branch = $_POST["branch"];
                         $dept = $_POST["dept"];
-                        $expiration = $_POST["expiration"];
+                       
                         $type = '1';
                         /* $message = 'This is a message.';   */
 
@@ -250,8 +309,16 @@
                         include("connect.php");
                         $cookie_name = "notapp_username";
                         $username = $_COOKIE[$cookie_name];
+                        
+                        
                         $sql = "select u_id from user where email='$username'";
                         $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+                        
+                        //$stmt = mysqli_prepare($conn, "select u_id from user where email=?");
+                        //mysqli_stmt_bind_param($stmt, "s", $username);
+                        //mysqli_stmt_execute($stmt); 
+                        //$result = $stmt->get_result();
+                        
                         $user_details = mysqli_fetch_assoc($result);
 
                         $u_id = $user_details['u_id'];
@@ -267,6 +334,7 @@
 
                         //d_id
                         $d_id = $dept_details['d_id'];
+                        $nb_id = $d_id;
 
                         //to create random string
 
@@ -290,7 +358,7 @@
                         $path = "notices/" . $dept . "/" . $name . ".pdf";
 
 
-                        $exp =  date('Y-m-d', strtotime($expiration));
+                        
 
 
 
@@ -298,19 +366,16 @@
                         if (move_uploaded_file($_FILES["notice"]["tmp_name"], $path)) 
                         {
 
-                            //echo "The file has been uploaded";
+                            echo "The file has been uploaded";
                             $file_size = filesize($_FILES["notice"]["tmp_name"]);
                         } 
                         else 
                         {
-                            //echo "sorry, there was an error uploading your file.";
+                            echo "sorry, there was an error uploading your file.";
                             $file_size = -1;
                         }    
 
-                        if($exp == '1970-01-01' || $exp == null)
-                        {
-                            $exp =  date('Y-m-d', strtotime('2016-07-04'));
-                        } 
+                        
 
                         $sql = "select c_id from class where c_name='$class'";
                         $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
@@ -322,8 +387,15 @@
                         $upDate = date('Y-m-d');
 
 
-                        $sql = "insert into notice(title, n_type, uploadDate, exp, name, u_id, d_id) values ('$title' , '$type', '$upDate' , '$exp' , '$name' , '$u_id', '$d_id')";
+                        $sql = "insert into notice(title, n_type, uploadDate, name, u_id, d_id) values ('$title' , '$type', '$upDate'  , '$name' , '$u_id', '$d_id')";
                         $result = mysqli_query($conn,$sql) or die("<p>insert error</p>"); 
+                        
+                        //$stmt = mysqli_prepare($conn, "insert into notice(title, n_type, uploadDate, exp, name, u_id, d_id) values (? , ?, ? , ? , ? , ?, ?)");
+                        //mysqli_stmt_bind_param($stmt, "sssssdd", $title , $type, $upDate , $exp , $name , $u_id, $d_id);
+                        //mysqli_stmt_execute($stmt); 
+                        //$result = $stmt->get_result();
+                        
+                        
 
                         $n_id = mysqli_insert_id($conn);
 
@@ -331,7 +403,7 @@
                         $result = mysqli_query($conn,$sql) or die("<p>insert error</p>");
                         $md5 = md5_file($path);
 
-                        echo "notices/$dept/$name.pdf". "<br>" . "$md5"; 
+                        //echo "notices/$dept/$name.pdf". "<br>" . "$md5"; 
 
 
                         $temp_id = ''.$n_id;
@@ -342,7 +414,6 @@
                             'uploadDate'=> $upDate,
                             'name'	     => $user_name,
                             'n_id'=> $temp_id,
-                            'exp'	=> $exp,
                             'dept'	=> $d_id,
                             'link' => $name,
                             'md5' => $md5
@@ -362,11 +433,53 @@
                             $dept_details = mysqli_fetch_assoc($result);
 
                             $d_id = $dept_details['d_id'];
+                            
+                            echo "<br> $d_id  $n_id <br>";
 
                             $sql = "insert into n_for_d(n_id, d_id) values ('$n_id' , '$d_id')";
                             $result = mysqli_query($conn,$sql) or die("<p>insert error</p>"); 
-
-
+                            
+                            /**/
+                            
+                            $sql = "select u_id,gcmRegId from student where d_id='$d_id' and c_id='$c_id'";
+                            $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+                            
+                            $regId = array();
+                                
+                            while($stud_details = mysqli_fetch_assoc($result))
+                            {
+                                $temp_id = $stud_details['u_id'];
+                                echo "<br>u_id   $temp_id<br>";
+                                $flag=0;
+                                $sql = "select prefs from preferences where u_id=$temp_id";
+                                $res=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+                                $pref_details = mysqli_fetch_assoc($res);
+                                $temp_prefs = $pref_details['prefs'];
+                                
+                                echo "<br><br> $temp_prefs <br><br>";
+                                
+                                $prefs_arr = explode(",", $temp_prefs);
+                                
+                                foreach($prefs_arr as $pref)
+                                {
+                                    echo $pref."** $nb_id $dept<br><br>";
+                                    if($pref == $nb_id)
+                                    {
+                                        $flag = 1;
+                                        break;
+                                    }
+                                }
+                                
+                                if($flag == 1)
+                                {
+                                    $regId[] = $stud_details['gcmRegId'];
+                                }
+                                
+                            }
+                            
+                            /*                    
+                            
+                            
                             $sql = "select gcmRegId from student where d_id='$d_id' and c_id='$c_id'";
                             $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
                             //$stud_details = mysqli_fetch_assoc($result);
@@ -377,9 +490,9 @@
                             {
                                 $regId[] = $r['gcmRegId'];
                             }
-
-                            //echo json_encode($regId);
-
+                            */
+                            echo json_encode($regId);
+                            
                             include_once 'push/gcm.php';
 
                             $gcm = new GCM();
@@ -387,19 +500,9 @@
                             $gcm_res = $gcm->send_notification($regId, $msg);
 
                         }
-
-
-                    }
-
-                    
-                }
-                
-                
-                
-                
+                    }                    
+                }        
             }    
-
-
         ?>
         
         <main>            
@@ -412,14 +515,14 @@
                         
                         <div class="dp">
                             <?php
-                                if(!$user_details['avatar'])
+                                //if(!$user_details['avatar'])
                                 {
                                     echo "<img src=' graphics/placeholder.png' alt='' height='40px'>";
                                 }
 
-                                else
+                                //else
                                 {
-                                    echo "<img src=' graphics/dp.jpg' alt='' height='40px'>";
+                                    //echo "<img src=' graphics/dp.jpg' alt='' height='40px'>";
                                 }
                             ?>
                         </div>
@@ -434,8 +537,7 @@
                                 <a class="signout" href="logout.php">Sign out</a>
                             </div>
                         </div>
-                    </div>
-                    
+                    </div>                    
                 </nav>
                 
                 <nav class="nav-bar-tabs z-depth-1 teal darken-1">
@@ -623,71 +725,62 @@
                                 
                                 
                                 <div class="row">
+                                    
                                     <div class="input-field col s12 m8 offset-m2 sel-input">
-                                        <select class="icons">
-                                            <option value="" disabled selected>Choose your option</option>
-                                            <optgroup label="Departments">
-                                                
-                                                <option value="it" data-icon="graphics/icons/it.png" class="circle left">InfoTech</option>
-                                                <option value="cse" data-icon="graphics/icons/cse.png" class="circle left">Computer Science</option>
-                                                <option value="eln" data-icon="graphics/icons/eln.png" class="circle left">Electronics</option>
-                                                <option value="ele" data-icon="graphics/icons/ele.png" class="circle left">Electrical</option>
-                                                <option value="mech" data-icon="graphics/icons/mech.png" class="circle left">Mechanical</option>
-                                                <option value="civ" data-icon="graphics/icons/civ.png" class="circle left">Civil</option>
-                                            </optgroup>
+                                        <select class="icons" name="dept" id="dept">
+                                            <option value="" disabled selected>Choose your option</option>                   
                                             
-                                            <optgroup label="Sciences">
+                                            <?php
+                                                //$err_mssge = '<br>before sql<br>';                                            
                                                 
-                                                <option value="phy" data-icon="graphics/icons/phy.png" class="circle left">Physics</option>
-                                                <option value="chem" data-icon="graphics/icons/chem.png" class="circle left">Chemistry</option>
-                                                <option value="math" data-icon="graphics/icons/math.png" class="circle left">Mathematics</option>
-                                                <option value="bio" data-icon="graphics/icons/bio.png" class="circle left">Biology</option>
-                                                
-                                            </optgroup>
+                                                $u_id = $user_details['u_id'];
                                             
-                                            <optgroup label="Administration">
-                                                
-                                                <option value="admin" data-icon="graphics/icons/admin.png" class="circle left">Admin / Office</option>
-                                                <option value="tpo" data-icon="graphics/icons/tpo.png" class="circle left">Training & Placement</option>
-                                                <option value="exam" data-icon="graphics/icons/exam.png" class="circle left">Exam Cell</option>
-                                                
-                                            </optgroup>
+                                                $sql = "select TBD.d_id from t_belongsto_d TBD inner join teacher T on TBD.t_id = T.t_id where T.u_id=$u_id";
                                             
-                                            <optgroup label="Miscellaneous">
+                                                $res=mysqli_query($conn,$sql) or die(mysqli_error($conn));
                                                 
-                                                <option value="rector" data-icon="graphics/icons/rector.png" class="circle left">Rector</option>
-                                                <option value="sports" data-icon="graphics/icons/sports.png" class="circle left">Sports & Gym</option>
-                                                <option value="scholarship" data-icon="graphics/icons/scholarship.png" class="circle left">Scholarship</option>
-                                                <option value="library" data-icon="graphics/icons/library.png" class="circle left">Library</option>
-                                                <option value="lostfound" data-icon="graphics/icons/lostfound.png" class="circle left">Lost & Found</option>
+                                            
+                                                while($res_arr = mysqli_fetch_assoc($res))
+                                                {
+                                                    
+                                                    $dept_pref = $res_arr['d_id'];
+                                                    
+                                                    $sql = "select * from department where d_id='$dept_pref'";
+                                                    $dept_prefs=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+                                                    $prefs_arr = mysqli_fetch_assoc($dept_prefs);
+                                                    
+                                                    $dept_code = strtolower($prefs_arr['d_name']);
+                                                    $dept_fullname = $prefs_arr['full_name'];
                                                 
-                                            </optgroup>
+                                                    echo "<option value='$dept_code' data-icon='graphics/icons/$dept_code.png' class='circle left'>$dept_fullname</option>";        
+                                                }
+                                                                                           
+                                            
+                                            ?>
+                                                
+                                            
+                                                
+                                           
                                         </select>
+                                        
+                                        
+                                        
+                                        
                                         <label>Notice Board</label>
+                                        
                                     </div>
                                 </div>
+                                <br><br>
                             </div>
                         </div>
                         
-                        <div class="card white">
-                            <div class="card-content grey-text text-darken-1">
-                                <span class="card-title">Select Expiration Date (optional)</span>                       
-                                <div class="row date">
-                                     <div class="input-field col s12 m10 offset-m1">
-                                 
-                                        <i class="material-icons prefix">date_range</i>
-                                        <input id="expiration" type="date" name="expiration"  class="datepicker">
-                                        <label class="active" for="expiration">Expiration Date</label>
-                                    </div>
-                                </div>
-                                
-                                <div style="width:60px; margin:auto; margin-top:60px; margin-bottom: 10px;">
                         
-                                    <button class="btn-floating btn-large waves-effect waves-light" type="submit" name="upload">
-                                        <i class="material-icons right">file_upload</i>
-                                    </button>
-                        </div>
-                            </div>
+                        
+                        <div style="width:60px; margin:auto; margin-top:-43px; margin-bottom: 10px;">
+                        
+                            <button class="btn-floating btn-large waves-effect waves-light" type="submit" name="upload">
+                                <i class="material-icons right">file_upload</i>
+                            </button>
                         </div>
                         
                         <!--
@@ -761,3 +854,10 @@
        
     </body>
 </html>
+
+
+
+
+
+
+

@@ -33,7 +33,7 @@
                             <div class="card-content grey-text text-darken-1">
                                 <div class="row">
                                     <span class="card-title col offset-m1">RubberDuck</span>
-                                    <div class="col m10 s12 offset-m1"><p align="justify">We are a group of developers (B.Tech Students) focussed on creating an impact and providing personalised services to our clients. Currently we specialize in Android Application Development, Web Development, Software Sales, Services and Maintainance.<br> At Annexion, we set high goals and do our best to achieve them. We deliver an experience to our clients that is no short of outstanding and would love to do the same for you too. Contact us at:</p>
+                                    <div class="col m10 s12 offset-m1"><p align="justify">We are a group of developers (B.Tech Students) focussed on creating an impact and providing personalised services to the users. Currently we specialize in Android Application Development, Web Development, UI/UX Developement, Services and Maintainance.<br> We set high goals and do our best to achieve them. We deliver an experience to the users that is no short of outstanding and would love to do the same for you too. Contact us at:</p>
                                         <br>Website : <a href = "http://www.rubberduck.co.in" target="_blank">www.rubberduck.co.in</a>
                                         <br>Phone   : +919503653859
                                         <br>Email   : clan.rubberduck@gmail.com
@@ -45,69 +45,58 @@
                     </div>
                 </div>
                 
-                <div class="row">
-                    <div class="col s12 m4">
-                        <div class="card">
-                            <div class="card-image">
-                                <img class="materialboxed" data-caption="Sarang Tayde" src="graphics/devs/sarang.jpg">
-                                <span class="card-title">Sarang Tayde</span>
-                            </div>
-                                                        
-                            <div class="card-action">
-                                <div class="social row">
-                                    <a href="https://www.facebook.com/sarang.tayde048" target="_blank" class="fb col s4"><i class="fa fa-facebook-square fa-2x fa-fw"></i></a>
-                                    <a href="" class="linkedin col s4" target="_blank"><i class="fa fa-linkedin-square fa-2x fa-fw"></i></a>
-                                    <a href="" class="twitter col s4" target="_blank"><i class="fa fa-twitter-square fa-2x fa-fw"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col s12 m4">
-                        <div class="card">
-                            <div class="card-image">
-                                <img class="materialboxed" data-caption="Manish Nikam" src="graphics/devs/manish.jpg">
-                                <span class="card-title">Manish Nikam</span>
-                            </div>
-                            
-                            <div class="card-action">
-                                <div class="social row">
-                                    <a href="https://www.facebook.com/nikamanish" target="_blank" class="fb col s4"><i class="fa fa-facebook-square fa-2x fa-fw"></i></a>
-                                    <a href="https://in.linkedin.com/in/nikamanish" class="linkedin col s4" target="_blank"><i class="fa fa-linkedin-square fa-2x fa-fw"></i></a>
-                                    <a href="" class="twitter col s4" target="_blank"><i class="fa fa-twitter-square fa-2x fa-fw"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col s12 m4">
-                        <div class="card">
-                            <div class="card-image">
-                                <img class="materialboxed" data-caption="Kushal Kale" src="graphics/devs/kushal.jpg">
-                                <span class="card-title">Kushal Kale</span>
-                            </div>
-                                                    
-                            <div class="card-action">
-                                <div class="social row">
-                                    <a href="https://www.facebook.com/kushal.s.kale" target="_blank" class="fb col s4"><i class="fa fa-facebook-square fa-2x fa-fw"></i></a>
-                                    <a href="" class="linkedin col s4" target="_blank"><i class="fa fa-linkedin-square fa-2x fa-fw"></i></a>
-                                    <a href="" class="twitter col s4" target="_blank"><i class="fa fa-twitter-square fa-2x fa-fw"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 
                 <div class="row">
-                    
+                    <div class="col s12">
+                        <div class="card white">
+                            <div class="card-content grey-text text-darken-1">
+                                <div class="row">
+                                    <div class="col s12 devs">
+                                        <span class="card-title">&lt; developers &frasl;&gt;</span>
+                                    </div>
+                                    
+                                    
+                                    <div class="col s12 m4 social">
+                                        <img class="responsive-img" src="graphics/devs/sarang.gif">
+                                        <span class="dev-name">Sarang Tayde</span>
+                                        
+                                        <div class="social row">
+                                            <div class="col s10 offset-s1 row">
+                                                <a href="https://www.facebook.com/sarang.tayde048" target="_blank" class="fb col s4"><i class="fa fa-facebook-square fa-2x fa-fw"></i></a>
+                                                <a href="https://in.linkedin.com/in/sarang-tayde-9b27b3a2" class="linkedin col s4" target="_blank"><i class="fa fa-linkedin-square fa-2x fa-fw"></i></a>
+                                                <a href="https://github.com/fanatic007" class="twitter col s4" target="_blank"><i class="fa fa-github-square fa-2x fa-fw"></i></a>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col s12 m4 social">
+                                        <img class="responsive-img" src="graphics/devs/nick.gif">
+                                        <span class="dev-name">Manish Nikam</span>
+                                        
+                                        <div class="social row">
+                                            <div class="col s10 offset-s1 row">
+                                                <a href="https://www.facebook.com/nikamanish" target="_blank" class="fb col s4"><i class="fa fa-facebook-square fa-2x fa-fw"></i></a>
+                                                <a href="https://in.linkedin.com/in/nikamanish" class="linkedin col s4" target="_blank"><i class="fa fa-linkedin-square fa-2x fa-fw"></i></a>
+                                                <a href="https://github.com/nikamanish007" class="twitter col s4" target="_blank"><i class="fa fa-github-square fa-2x fa-fw"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m4 social">
+                                        <img class="responsive-img" src="graphics/devs/kushal.gif">
+                                        <span class="dev-name">Kushal Kale</span>
+                                        
+                                        <div class="social row">
+                                            <div class="col s10 offset-s1 row">
+                                                <a href="https://www.facebook.com/kushal.s.kale" target="_blank" class="fb col s4"><i class="fa fa-facebook-square fa-2x fa-fw"></i></a>
+                                                <a href="https://in.linkedin.com/in/kalekushal" class="linkedin col s4" target="_blank"><i class="fa fa-linkedin-square fa-2x fa-fw"></i></a>
+                                                <a href="" class="twitter col s4" target="_blank"><i class="fa fa-github-square fa-2x fa-fw"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
                     </div>
-                    
-                    
-                </div>
-                
-                <div class="row">
-                   
-                    
-                    
                 </div>
             </div>
         </main>

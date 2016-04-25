@@ -64,6 +64,11 @@
                                                     $type = 1;
                                                     insertValues($fname, $lname, $email, $password, $phone, $dob, $type);
                                                     insertStaffValue($email);
+                                                    $cookie_name = "notapp_username";
+                                                    setcookie($cookie_name, $email, time() + (60 * 60 * 24), "/");
+                                                    setcookie('type', 'register', time() + (60 * 60), "/");
+                                                    header( "Location:subscribe.php" );  
+                                                    exit();
                                                 }
                                                 
                                                 else
@@ -85,17 +90,17 @@
                                                 $type = 2;
                                                 insertValues($fname, $lname, $email, $password, $phone, $dob, $type);
 
-                                                insertStudentValue($prn, $class, $dept, $email);    
+                                                insertStudentValue($prn, $class, $dept, $email);   
+                                                
+                                                header( "Location:index.php" );   
+                                                exit();
                                             }
                                             else
                                             {
                                                 echo "insert all values";
                                             }
                                             
-                                        }
-
-                                        header( "Location:index.php" );   
-                                        exit();
+                                        }                                      
 
                                     }
                                     else
@@ -318,6 +323,7 @@
                         </div>
                         
                         <div class="card-action">
+                            
                             
                             <div class="row">
                                 

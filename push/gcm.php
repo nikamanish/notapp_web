@@ -14,10 +14,12 @@ class GCM {
     public function send_notification($registration_ids, $message) {
         
         // API access key from Google API's Console
-        define( 'API_ACCESS_KEY', 'AIzaSyBBKn1H2Du4kC4n_P1_2LDggHm6EJgYm8M' );
+        
         //$registrationIds = array( $_GET['id'] );
         
         // prep the bundle
+        
+        $API_ACCESS_KEY = 'AIzaSyBBKn1H2Du4kC4n_P1_2LDggHm6EJgYm8M';
         
         $fields = array
         (
@@ -27,7 +29,7 @@ class GCM {
 
         $headers = array
         (
-            'Authorization: key=' . API_ACCESS_KEY,
+            'Authorization: key=' . $API_ACCESS_KEY,
             'Content-Type: application/json'
         );
 

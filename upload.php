@@ -14,6 +14,9 @@
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         
+        
+        
+        
         <title>
             
             <?php            
@@ -24,7 +27,8 @@
                     header( "Location:index.php"); 
                     exit();
                 }
-
+                
+                $js_mssge = '';
             
                 $username = $_COOKIE[$cookie_name];
                 //$username = 'nikamanish007@gmail.com';
@@ -80,7 +84,6 @@
                         $class = $_POST["class"];
                         $branch = $_POST["branch"];
                         $dept = $_POST["dept"];
-                        $expiration = $_POST["expiration"];
                         $type = '2';
                         $name = $_POST["messageText"];
                         $name = '#'.$name;                       
@@ -137,17 +140,12 @@
                         $nb_id = $d_id;
                         
                         
-                        $exp =  date('Y-m-d', strtotime($expiration));
-
-                        if($exp == '1970-01-01' || $exp == null)
-                        {
-                            $exp =  date('Y-m-d', strtotime('2016-07-04'));
-                        } 
+                        
                         
                         $upDate = date('Y-m-d');
                         
                         
-                        $sql = "insert into notice(title, n_type, uploadDate, exp, name, u_id, d_id) values ('$title' , '$type', '$upDate' , '$exp' , '$name' , '$u_id', '$d_id')";
+                        $sql = "insert into notice(title, n_type, uploadDate, name, u_id, d_id) values ('$title' , '$type', '$upDate'  , '$name' , '$u_id', '$d_id')";
                         
                         
                         //echo "<br>$sql<br>";
@@ -181,12 +179,13 @@
                             'uploadDate'=> $upDate,
                             'name'	     => $user_name,
                             'n_id'=> $temp_id,
-                            'exp'	=> $exp,
                             'dept'	=> $d_id,
                             'link' => $name,
                             'md5' => $md5
                             /*  'message' => $message  */
                         );
+                        
+                        $number_studs = 0;
 
 
                         //echo json_encode($msg);
@@ -236,6 +235,7 @@
                                 if($flag == 1)
                                 {
                                     $regId[] = $stud_details['gcmRegId'];
+                                    $number_studs ++;
                                 }                                
                             }
                             
@@ -256,9 +256,13 @@
                             include_once 'push/gcm.php';
 
                             $gcm = new GCM();
-
                             $gcm_res = $gcm->send_notification($regId, $msg);
-                        }                       
+                           
+                        } 
+                        $js_mssge.= "<script type='text/javascript'>makeToast('Message sent successfully');</script>";
+                        $js_mssge.= "<script type='text/javascript'>makeToast('Sent to $number_studs students');</script>";
+
+                         
                     }
                 }
                 
@@ -307,7 +311,7 @@
                         $class = $_POST["class"];
                         $branch = $_POST["branch"];
                         $dept = $_POST["dept"];
-                        $expiration = $_POST["expiration"];
+                       
                         $type = '1';
                         /* $message = 'This is a message.';   */
 
@@ -365,7 +369,7 @@
                         $path = "notices/" . $dept . "/" . $name . ".pdf";
 
 
-                        $exp =  date('Y-m-d', strtotime($expiration));
+                        
 
 
 
@@ -382,10 +386,7 @@
                             $file_size = -1;
                         }    
 
-                        if($exp == '1970-01-01' || $exp == null)
-                        {
-                            $exp =  date('Y-m-d', strtotime('2016-07-04'));
-                        } 
+                        
 
                         $sql = "select c_id from class where c_name='$class'";
                         $result=mysqli_query($conn,$sql) or die(mysqli_error($conn));
@@ -397,7 +398,7 @@
                         $upDate = date('Y-m-d');
 
 
-                        $sql = "insert into notice(title, n_type, uploadDate, exp, name, u_id, d_id) values ('$title' , '$type', '$upDate' , '$exp' , '$name' , '$u_id', '$d_id')";
+                        $sql = "insert into notice(title, n_type, uploadDate, name, u_id, d_id) values ('$title' , '$type', '$upDate'  , '$name' , '$u_id', '$d_id')";
                         $result = mysqli_query($conn,$sql) or die("<p>insert error</p>"); 
                         
                         //$stmt = mysqli_prepare($conn, "insert into notice(title, n_type, uploadDate, exp, name, u_id, d_id) values (? , ?, ? , ? , ? , ?, ?)");
@@ -424,14 +425,14 @@
                             'uploadDate'=> $upDate,
                             'name'	     => $user_name,
                             'n_id'=> $temp_id,
-                            'exp'	=> $exp,
                             'dept'	=> $d_id,
                             'link' => $name,
                             'md5' => $md5
                         /*  'message' => $message  */
 
                         );
-
+                        
+                        $number_studs = 0;
 
                         //echo json_encode($msg);
 
@@ -484,6 +485,7 @@
                                 if($flag == 1)
                                 {
                                     $regId[] = $stud_details['gcmRegId'];
+                                    $number_studs ++;
                                 }
                                 
                             }
@@ -507,10 +509,15 @@
                             include_once 'push/gcm.php';
 
                             $gcm = new GCM();
+                            
+                           
 
                             $gcm_res = $gcm->send_notification($regId, $msg);
-
+                            
+                            
                         }
+                        $js_mssge.= "<script type='text/javascript'>makeToast('Notice uploaded successfully');</script>";
+                        $js_mssge.= "<script type='text/javascript'>makeToast('Sent to $number_studs students');</script>";
                     }                    
                 }        
             }    
@@ -521,7 +528,7 @@
                 <nav class="nav-bar-info z-depth-half teal darken-3">
                     <div class="info">
                         <div class="title">
-                            <label class="nav-title">Notapp - Upload</label>
+                            <label class="nav-title">Notapp - Settings</label>
                         </div>        
                         
                         <div class="dp">
@@ -551,21 +558,40 @@
                     </div>                    
                 </nav>
                 
-                <nav class="nav-bar-tabs z-depth-1 teal darken-1">
+                <nav class="nav-bar-tabs z-depth-1 teal darken-1 pc-nav">                    
                     
+                    <div class="row">
+                        <div class="col s10 l6">
+                            <ul class="tab-bar">
+                                <li class="tab-new col s3"><a class="tooltipped active" data-position="bottom" data-delay="5" data-tooltip="Upload new notice" href="">Upload</a></li>
+                                <li class="tab-new col s3"><a  href="view.php" class=" tooltipped" data-position="bottom" data-delay="5" data-tooltip="View uploaded notices">View</a></li>
+                                <li class="tab-new col s3"><a href="" class="tooltipped" data-position="bottom" data-delay="5" data-tooltip="Need help?">Help</a></li>
+                                <li class="tab-new col s3"><a href="aboutus.php" class="tooltipped" data-position="bottom" data-delay="5" data-tooltip="About the Developers">About</a></li>
+                                <li class="tab-new invisible col s3 tooltipped" data-position="bottom" data-delay="5" data-tooltip="General settings"><a href="setting.php"><i class="material-icons prefix">settings</i></a></li>
+                                <li class="tab-new invisible col s3 tooltipped" data-position="bottom" data-delay="5" data-tooltip="Sign out"><a href="logout.php">Exit</a></li>
+                            </ul>
+                        </div>
+                        <div class="col right setting-div waves-light waves-effect">
+                            <a class="setting-icon " href="setting.php"><i class="material-icons prefix">settings</i></a>
+                        </div>
+                    </div>                   
+                    
+                </nav>
+                
+                <nav class="nav-bar-tabs z-depth-1 teal darken-1 phone-nav invisible">                    
                     
                     <div class="row">
                         <div class="col s12 l6">
                             <ul class="tab-bar">
-                                <li class="tab-new col s3"><a class="active tooltipped" data-position="bottom" data-delay="5" data-tooltip="Upload new notice" href="">New</a></li>
-                                <li class="tab-new col s3"><a  href="view.php" class=" tooltipped" data-position="bottom" data-delay="5" data-tooltip="View uploaded notices">View</a></li>
-                                <li class="tab-new col s3"><a href="" class="tooltipped" data-position="bottom" data-delay="5" data-tooltip="Need help?">Help</a></li>
-                                <li class="tab-new col s3"><a href="aboutus.php" class="tooltipped" data-position="bottom" data-delay="5" data-tooltip="About the Developers">About</a></li>
-                                <li class="tab-new invisible col s3 tooltipped" data-position="bottom" data-delay="5" data-tooltip="Sign out"><a href="logout.php">Exit</a></li>
+                                <li class="tab-new col s3 active"><a class="active" data-position="bottom" data-delay="5"  href=""><i class="material-icons prefix">file_upload</i></a></li>
+                                <li class="tab-new col s3"><a  href="view.php" class=" " data-position="bottom"><i class="material-icons prefix">description</i></a></li>
+                                <li class="tab-new  col s3 " data-position="bottom" data-delay="5" ><a href="setting.php"><i class="material-icons prefix">settings</i></a></li>
+                                <li class="tab-new col s3"><a href="" class="" data-position="bottom" data-delay="5" ><i class="material-icons prefix">help</i></a></li>
+                                <li class="tab-new col s3"><a href="aboutus.php" class="" data-position="bottom" ><i class="material-icons prefix">developer_mode</i></a></li>
+                                <li class="tab-new  col s3 " data-position="bottom" data-delay="5" ><a href="logout.php"><i class="material-icons prefix">exit_to_app</i></a></li>
                             </ul>
                         </div>
-                    </div>                   
-                    
+                    </div> 
                 </nav>
             </div>
             
@@ -736,72 +762,56 @@
                                 
                                 
                                 <div class="row">
-                                
-                                    
                                     
                                     <div class="input-field col s12 m8 offset-m2 sel-input">
                                         <select class="icons" name="dept" id="dept">
-                                            <option value="" disabled selected>Choose your option</option>
-                                            <optgroup label="Departments">
-                                                
-                                                <option value="it" data-icon="graphics/icons/it.png" class="circle left">Information Technology</option>
-                                                <option value="cse" data-icon="graphics/icons/cse.png" class="circle left">Computer Science</option>
-                                                <option value="eln" data-icon="graphics/icons/eln.png" class="circle left">Electronics</option>
-                                                <option value="ele" data-icon="graphics/icons/ele.png" class="circle left">Electrical</option>
-                                                <option value="mech" data-icon="graphics/icons/mech.png" class="circle left">Mechanical</option>
-                                                <option value="civ" data-icon="graphics/icons/civ.png" class="circle left">Civil</option>
-                                            </optgroup>
+                                            <option value="" disabled selected>Choose your option</option>                   
                                             
-                                            <optgroup label="Sciences">
+                                            <?php
+                                                //$err_mssge = '<br>before sql<br>';                                            
                                                 
-                                                <option value="phy" data-icon="graphics/icons/phy.png" class="circle left">Physics</option>
-                                                <option value="chem" data-icon="graphics/icons/chem.png" class="circle left">Chemistry</option>
-                                                <option value="math" data-icon="graphics/icons/math.png" class="circle left">Mathematics</option>
-                                                <option value="bio" data-icon="graphics/icons/bio.png" class="circle left">Biology</option>
-                                                
-                                            </optgroup>
+                                                $u_id = $user_details['u_id'];
                                             
-                                            <optgroup label="Administration">
-                                                
-                                                <option value="admin" data-icon="graphics/icons/admin.png" class="circle left">Admin / Office</option>
-                                                <option value="tpo" data-icon="graphics/icons/tpo.png" class="circle left">Training & Placement</option>
-                                                <option value="exam" data-icon="graphics/icons/exam.png" class="circle left">Exam Cell</option>
-                                                
-                                            </optgroup>
+                                                $sql = "select TBD.d_id from t_belongsto_d TBD inner join teacher T on TBD.t_id = T.t_id where T.u_id=$u_id";
                                             
-                                            <optgroup label="Miscellaneous">
+                                                $res=mysqli_query($conn,$sql) or die(mysqli_error($conn));
                                                 
-                                                <option value="rector" data-icon="graphics/icons/rector.png" class="circle left">Rector</option>
-                                                <option value="sports" data-icon="graphics/icons/sports.png" class="circle left">Sports & Gym</option>
-                                                <option value="scholarship" data-icon="graphics/icons/scholarship.png" class="circle left">Scholarship</option>
-                                                <option value="library" data-icon="graphics/icons/library.png" class="circle left">Library</option>
-                                                <option value="lostfound" data-icon="graphics/icons/lostfound.png" class="circle left">Lost & Found</option>
+                                            
+                                                while($res_arr = mysqli_fetch_assoc($res))
+                                                {
+                                                    
+                                                    $dept_pref = $res_arr['d_id'];
+                                                    
+                                                    $sql = "select * from department where d_id='$dept_pref'";
+                                                    $dept_prefs=mysqli_query($conn,$sql) or die(mysqli_error($conn));
+                                                    $prefs_arr = mysqli_fetch_assoc($dept_prefs);
+                                                    
+                                                    $dept_code = strtolower($prefs_arr['d_name']);
+                                                    $dept_fullname = $prefs_arr['full_name'];
                                                 
-                                            </optgroup>
+                                                    echo "<option value='$dept_code' data-icon='graphics/icons/$dept_code.png' class='circle left'>$dept_fullname</option>";        
+                                                }
+                                                                                           
+                                            
+                                            ?>
+                                                
+                                            
+                                                
+                                           
                                         </select>
                                         
                                         
                                         
                                         
                                         <label>Notice Board</label>
+                                        
                                     </div>
                                 </div>
+                                <br><br>
                             </div>
                         </div>
                         
-                        <div class="card white">
-                            <div class="card-content grey-text text-darken-1">
-                                <span class="card-title">Select Expiration Date (optional)</span>                       
-                                <div class="row date">
-                                     <div class="input-field col s12 m10 offset-m1" style="padding-bottom: 40px;">
-                                 
-                                        <i class="material-icons prefix">date_range</i>
-                                        <input id="expiration" type="date" name="expiration"  class="datepicker">
-                                        <label class="active" for="expiration">Expiration Date</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         
                         <div style="width:60px; margin:auto; margin-top:-43px; margin-bottom: 10px;">
                         
@@ -841,7 +851,7 @@
         <script>
             $(document).ready(function() 
             {
-                Materialize.toast('Welcome to Notapp Web', 2000, 'custom-toast');
+                
                 $('.tooltipped').tooltip({delay: 50});
                 Materialize.fadeInImage('#profilepic');
                 Materialize.showStaggeredList('#staggered-list');
@@ -864,23 +874,23 @@
                 }
             
             });
-
+            function makeToast(mssg)
+            {
+                Materialize.toast(mssg, 3000, 'rounded');
+            }
         </script>
         
-        <script>
-        (function($){
-          $(function(){
-
-            $('.button-collapse').sideNav();
-
-          }); // end of document ready
-        })(jQuery);
-        
-        </script>
+        <?php
+            echo $js_mssge;
+        ?>
         
        
     </body>
 </html>
+
+
+
+
 
 
 

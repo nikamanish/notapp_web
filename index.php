@@ -56,7 +56,7 @@
                             }
                             else
                             {
-                                setcookie($cookie_name, $username, time() + (3600), "/");
+                                setcookie($cookie_name, $username, time() + (60 * 60 * 24), "/");
                             }
                             
                             

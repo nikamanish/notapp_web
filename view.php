@@ -45,10 +45,21 @@
                 <nav class="nav-bar-info z-depth-half teal darken-3">
                     <div class="info">
                         <div class="title">
-                            <label class="nav-title">Notapp - Upload</label>
-                        </div> 
+                            <label class="nav-title">Notapp - Settings</label>
+                        </div>        
+                        
                         <div class="dp">
-                            <img height="40px" class="" src="graphics/placeholder.png">
+                            <?php
+                                //if(!$user_details['avatar'])
+                                {
+                                    echo "<img src=' graphics/placeholder.png' alt='' height='40px'>";
+                                }
+
+                                //else
+                                {
+                                    //echo "<img src=' graphics/dp.jpg' alt='' height='40px'>";
+                                }
+                            ?>
                         </div>
                         
                         <div class="text-info">
@@ -64,19 +75,44 @@
                     </div>                    
                 </nav>
                 
-                <nav class="nav-bar-tabs z-depth-1 teal darken-1">
+                <nav class="nav-bar-tabs z-depth-1 teal darken-1 pc-nav">                    
+                    
+                    <div class="row">
+                        <div class="col s10 l6">
+                            <ul class="tab-bar">
+                                <li class="tab-new col s3"><a class="tooltipped" data-position="bottom" data-delay="5" data-tooltip="Upload new notice" href="upload.php">Upload</a></li>
+                                <li class="tab-new col s3 "><a  href="view.php" class="active tooltipped" data-position="bottom" data-delay="5" data-tooltip="View uploaded notices">View</a></li>
+                                <li class="tab-new col s3"><a href="" class="tooltipped" data-position="bottom" data-delay="5" data-tooltip="Need help?">Help</a></li>
+                                <li class="tab-new col s3"><a href="aboutus.php" class="tooltipped" data-position="bottom" data-delay="5" data-tooltip="About the Developers">About</a></li>
+                                <li class="tab-new col invisible s3 tooltipped" data-position="bottom" data-delay="5" data-tooltip="General settings"><a href="setting.php"><i class="material-icons prefix">settings</i></a></li>
+                                <li class="tab-new invisible col s3 tooltipped" data-position="bottom" data-delay="5" data-tooltip="Sign out"><a href="logout.php">Exit</a></li>
+                            </ul>
+                        </div>
+                        <div class="col right setting-div waves-light waves-effect">
+                            <a class="setting-icon " href="setting.php"><i class="material-icons prefix">settings</i></a>
+                        </div>
+                    </div>                   
+                    
+                </nav>
+                
+                <nav class="nav-bar-tabs z-depth-1 teal darken-1 phone-nav invisible">                    
+                    
                     <div class="row">
                         <div class="col s12 l6">
                             <ul class="tab-bar">
-                                <li class="tab-new col s3"><a class="tooltipped" data-position="bottom" data-delay="5" data-tooltip="Upload new notice" href="upload.php">New</a></li>
-                                <li class="tab-new col s3"><a  href="" class="active tooltipped" data-position="bottom" data-delay="5" data-tooltip="View uploaded notices">View</a></li>
-                                <li class="tab-new col s3"><a href="" class="tooltipped" data-position="bottom" data-delay="5" data-tooltip="Need help?">Help</a></li>
-                                <li class="tab-new col s3"><a href="aboutus.php" class="tooltipped" data-position="bottom" data-delay="5" data-tooltip="About the Developers">About</a></li>
-                                <li class="tab-new invisible col s3 tooltipped" data-position="bottom" data-delay="5" data-tooltip="Sign out"><a href="">Exit</a></li>
+                                <li class="tab-new col s3"><a class="" data-position="bottom" data-delay="5"  href="upload.php"><i class="material-icons prefix">file_upload</i></a></li>
+                                <li class="tab-new col s3 active"><a  href="" class="active" data-position="bottom"><i class="material-icons prefix">description</i></a></li>
+                                <li class="tab-new  col s3 " data-position="bottom" data-delay="5" ><a href="setting.php"><i class="material-icons prefix">settings</i></a></li>
+                                <li class="tab-new col s3"><a href="" class="" data-position="bottom" data-delay="5" ><i class="material-icons prefix">help</i></a></li>
+                                <li class="tab-new col s3"><a href="aboutus.php" class="" data-position="bottom" ><i class="material-icons prefix">developer_mode</i></a></li>
+                                <li class="tab-new col s3 " data-position="bottom" data-delay="5" ><a href="logout.php"><i class="material-icons prefix">exit_to_app</i></a></li>
                             </ul>
                         </div>
-                    </div>
+                        
+                    </div>                   
+                    
                 </nav>
+                
             </div>
             
             <div class="content">                
@@ -101,7 +137,7 @@
                                     $dept_details = mysqli_fetch_assoc($dept_res);
                                     $dept = $dept_details['d_name'];
                                     $dept = strtolower($dept);
-                                    $exp = $row['exp'];
+                                    //$exp = $row['exp'];
                                     $upDate = $row['uploadDate'];
                                     $title = $row['title'];
                                     $name = $row['name'];
@@ -111,7 +147,7 @@
                                     
                                                                         
                                     $upDate = alphaDate($upDate);
-                                    $exp = alphaDate($exp);                                    
+                                    //$exp = alphaDate($exp);                                    
                                                                      
                                     
                                     if($name[0] != '#')
@@ -157,7 +193,7 @@
                                                         $classes                                                
                                                     </ul>
                                                     
-                                                    <p class='no-padding-top'>Expires on $exp</p>
+                                                    
                                                 </div>
                                             </li>";                                        
                                     }
@@ -186,7 +222,7 @@
 
                                                     <div class='modal-content'>
                                                     
-                                                        <h5 class='center-align'>
+                                                        <h5 class='center-align truncate'>
                                                             $title
                                                         </h5> 
                                                         
@@ -210,7 +246,7 @@
                                                         $classes                                                
                                                     </ul>
                                                     
-                                                    <p class='no-padding-top'>Expires on $exp</p>
+                                                    
                                                 </div>
                                             </li>";                                        
                                     }
@@ -296,7 +332,7 @@
 
             $('.button-collapse').sideNav();
 
-          }); // end of document ready
+          }); 
         })(jQuery);
         
         </script>
