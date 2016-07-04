@@ -33,7 +33,7 @@
                             <div class="card-content grey-text text-darken-1">
                                 <div class="row">
                                     <span class="card-title col offset-m1">RubberDuck</span>
-                                    <div class="col m10 s12 offset-m1"><p align="justify">We are a group of developers (B.Tech Students) focussed on creating an impact and providing personalised services to the users. Currently we specialize in Android Application Development, Web Development, UI/UX Developement, Services and Maintainance.<br> We set high goals and do our best to achieve them. We deliver an experience to the users that is no short of outstanding and would love to do the same for you too. Contact us at:</p>
+                                    <div class="col m10 s12 offset-m1"><p align="justify">We are a group of developers (B.Tech Students) focussed on creating an impact and providing personalised services to the users. Currently we specialize in Android Application Development, Web Development, UI/UX Developement, Services and Maintenance.<br> We set high goals and do our best to achieve them. We deliver an experience to the users that is no short of outstanding and would love to do the same for you too. Contact us at:</p>
                                         <br>Website : <a href = "http://www.rubberduck.co.in" target="_blank">www.rubberduck.co.in</a>
                                         <br>Phone   : +919503653859
                                         <br>Email   : clan.rubberduck@gmail.com
